@@ -53,7 +53,7 @@ module VsScorm
         lom_el = nil
         if adlcp_location = REXML::XPath.first(metadata_el, 'adlcp:location')
           # Read external metadata file
-          metadata_xmldoc = REXML::Document.new(package.file(adlcp_location.text.to_s))
+          metadata_xmldoc = REXML::Document.new(File.read(File.join(package.path, adlcp_location.text.to_s)))
           if metadata_xmldoc.nil? || (metadata_xmldoc.root.name != 'lom')
             raise InvalidManifest, "Invalid external metadata file (#{adlcp_location.text.to_s})."
           else
