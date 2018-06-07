@@ -1,6 +1,5 @@
 require 'rexml/document'
 require 'vs_scorm/metadata'
-require 'vs_scorm/organization'
 require 'vs_scorm/resource'
 
 module VsScorm
@@ -26,8 +25,6 @@ module VsScorm
     
     attr_accessor :identifier
     attr_accessor :metadata
-    attr_accessor :organizations
-    attr_accessor :default_organization
     attr_accessor :resources
     attr_accessor :base_url
     attr_accessor :schema
@@ -38,7 +35,6 @@ module VsScorm
     
       @package = package
       @metadata = VsScorm::Metadata.new
-      @organizations = Hash.new
       @resources = Hash.new
       
       # Manifest identifier
@@ -78,20 +74,6 @@ module VsScorm
         if lom_el
           @metadata = VsScorm::Metadata.from_xml(lom_el)
         end
-      end
-    
-      # Read organizations
-      if organizations_el = REXML::XPath.first(@xmldoc.root, '/manifest/organizations')
-        default_organization_id = organizations_el.attribute('default').to_s
-        REXML::XPath.each(@xmldoc.root, '/manifest/organizations/organization') do |el|
-          org = VsScorm::Organization.from_xml(el)
-          @organizations[org.id.to_s] = org
-        end
-        # Set the default organization
-        @default_organization = @organizations[default_organization_id]
-        raise InvalidManifest, "No default organization (#{default_organization_id})." if @default_organization.nil?
-      else
-        raise InvalidManifest, 'Missing organizations element.'
       end
     
       # Read resources
