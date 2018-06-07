@@ -6,7 +6,7 @@ Based on: https://github.com/mindset/scorm
 
 ## Usage
 
-TODO: Write usage instructions here
+Run and check `bin/example.rb some-scorm-package.zip`
 
 ## License
 
