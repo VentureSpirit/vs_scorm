@@ -48,7 +48,7 @@ module VsScorm
       @package = filename
       
       # Check if package is a file.
-      if File.file?(@package)
+      if @package && File.file?(@package)
         i = nil
         begin
           # Decide on a name for the package.
