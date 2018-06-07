@@ -5,10 +5,7 @@ require 'vs_scorm/resource'
 module VsScorm
   class Manifest
     
-    # Versions of the SCORM standard that is supported when running in
-    # strict mode. When not running in strict mode, the library will not
-    # care about the version specified in the package manifest and will
-    # simply try its best to parse the information that it finds.
+    # Versions of the SCORM standard that are supported
     SUPPORTED_VERSIONS = ['2004 3rd Edition', 'CAM 1.3', '1.2']
     
     # List of XML and XML Schema files that are part of the manifest for
@@ -48,10 +45,8 @@ module VsScorm
         @schema = schema_el.text.to_s unless schema_el.nil?
         @schema_version = schemaversion_el.text.to_s unless schemaversion_el.nil?
         
-        if @package.options[:strict]
-          if (@schema != 'ADL SCORM') || (!SUPPORTED_VERSIONS.include?(@schema_version))
-            raise InvalidManifest, "Sorry, unsupported SCORM-version (#{schema_el.text.to_s} #{schemaversion_el.text.to_s}), try turning strict parsing off."
-          end
+        if (@schema != 'ADL SCORM') || (!SUPPORTED_VERSIONS.include?(@schema_version))
+          raise InvalidManifest, "Sorry, unsupported SCORM-version (#{schema_el.text.to_s} #{schemaversion_el.text.to_s})"
         end
       
         # Find a <lom> element...

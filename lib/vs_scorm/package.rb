@@ -16,7 +16,6 @@ module VsScorm
     attr_accessor :package    # The file name of the package file.
     
     DEFAULT_LOAD_OPTIONS = { 
-      :strict => true,
       :cleanup => true,
       :name => nil,
       :repository => nil
@@ -38,7 +37,6 @@ module VsScorm
     # will also do any necessary cleanup if an exception occur anywhere in the
     # block. The available options are:
     #
-    #   :+strict+:     If +false+ the manifest will be parsed in a nicer way. Default: +true+.
     #   :+cleanup+:    If +false+ no cleanup will take place if an error occur. Default: +true+.
     #   :+name+:       The name to use when extracting the package to the 
     #                  repository. Default: will use the filename of the package 
