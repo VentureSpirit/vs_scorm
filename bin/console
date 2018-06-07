@@ -2,4 +2,5 @@
 
 require "bundler/setup"
 require "pry"
+require "vs_scorm"
 Pry.start

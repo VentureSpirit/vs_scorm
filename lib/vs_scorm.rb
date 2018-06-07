@@ -1,5 +1,1 @@
-require "vs_scorm/version"
-
-module VsScorm
-  # Your code goes here...
-end
+require "vs_scorm/package"
